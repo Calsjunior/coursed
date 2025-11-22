@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 {
     if (argc != 3)
     {
-        fprintf(stderr, "Usage ./compare_course <curriculum.csv> <available.csv>\n");
+        fprintf(stderr, "Usage ./coursed <curriculum.csv> <available.csv>\n");
         return 1;
     }
 
