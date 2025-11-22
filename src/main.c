@@ -4,7 +4,7 @@
 #include <string.h>
 
 FILE *open_csv_file(const char *filename);
-sqlite3 *db_setup();
+sqlite3 *setup_db();
 
 const char *csv_ext = ".csv";
 
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    sqlite3 *db = db_setup();
+    sqlite3 *db = setup_db();
     if (db == NULL)
     {
         fclose(csv_file1);
@@ -62,7 +62,7 @@ FILE *open_csv_file(const char *filename)
     return file;
 }
 
-sqlite3 *db_setup()
+sqlite3 *setup_db()
 {
     sqlite3 *db;
     int rc = sqlite3_open("courses.db", &db);
