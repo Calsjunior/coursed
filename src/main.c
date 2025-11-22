@@ -5,6 +5,7 @@
 
 FILE *open_csv_file(const char *filename);
 sqlite3 *setup_db();
+void create_tables(sqlite3 *db);
 
 const char *csv_ext = ".csv";
 
@@ -36,6 +37,8 @@ int main(int argc, char *argv[])
         fclose(csv_file2);
         return 1;
     }
+
+    create_tables(db);
 
     sqlite3_close(db);
     fclose(csv_file1);
@@ -73,4 +76,39 @@ sqlite3 *setup_db()
         return NULL;
     }
     return db;
+}
+
+void create_tables(sqlite3 *db)
+{
+    char *err_msg = 0;
+    int rc;
+    const char *sql_curriculum = "CREATE TABLE IF NOT EXISTS curriculum ("
+                                 "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
+                                 "code TEXT NOT NULL, "
+                                 "title TEXT NOT NULL, "
+                                 "credits INTEGER NOT NULL, "
+                                 "status TEXT NOT NULL);";
+
+    const char *sql_offer = "CREATE TABLE IF NOT EXISTS offered ("
+                            "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
+                            "code TEXT NOT NULL, "
+                            "title TEXT NOT NULL, "
+                            "credits INTEGER NOT NULL, "
+                            "status TEXT NOT NULL);";
+
+    rc = sqlite3_exec(db, sql_curriculum, 0, 0, &err_msg);
+    if (rc != SQLITE_OK)
+    {
+        fprintf(stderr, "Table error: %s\n", err_msg);
+        sqlite3_free(err_msg);
+        return;
+    }
+
+    rc = sqlite3_exec(db, sql_offer, 0, 0, &err_msg);
+    if (rc != SQLITE_OK)
+    {
+        fprintf(stderr, "Table error: %s\n", err_msg);
+        sqlite3_free(err_msg);
+        return;
+    }
 }
