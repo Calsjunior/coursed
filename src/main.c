@@ -56,7 +56,7 @@ FILE *open_csv_file(const char *filename)
     FILE *file = fopen(filename, "r");
     if (file == NULL)
     {
-        fprintf(stderr, "Error: Could not open file: %s\n", filename);
+        fprintf(stderr, "Error: Cannot open file %s\n", filename);
         return NULL;
     }
     return file;
@@ -68,7 +68,7 @@ sqlite3 *db_setup()
     int rc = sqlite3_open("courses.db", &db);
     if (rc != SQLITE_OK)
     {
-        fprintf(stderr, "Cannot open database: %s\n", sqlite3_errmsg(db));
+        fprintf(stderr, "Error: Cannot open database %s\n", sqlite3_errmsg(db));
         sqlite3_close(db);
         return NULL;
     }
