@@ -94,7 +94,7 @@ void create_tables(sqlite3 *db)
                             "code TEXT NOT NULL, "
                             "title TEXT NOT NULL, "
                             "credits INTEGER NOT NULL, "
-                            "status TEXT NOT NULL);";
+                            "time TEXT NOT NULL);";
 
     rc = sqlite3_exec(db, sql_curriculum, 0, 0, &err_msg);
     if (rc != SQLITE_OK)
