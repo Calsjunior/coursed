@@ -10,7 +10,7 @@ OBJ_DIR = obj
 
 SOURCES = $(shell find $(SRC_DIR) -name '*.c')
 OBJECTS = $(SOURCES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
-TARGET = course_check
+TARGET = coursed
 
 
 all: $(TARGET)
